@@ -1,0 +1,10 @@
+{
+    "name": "com.your_company.sandbox_opener",
+    "description": "Open Windows Sandbox",
+    "path": "D:\\Development\\JavaScript\\EdgeExtensionV1\\native-messaging\\open_sandbox.bat",
+    "type": "stdio",
+    "allowed_origins": [
+      "chrome-extension://omppkmjodoniflpedkcgcblneeammkgb/"
+    ]
+  }
+  

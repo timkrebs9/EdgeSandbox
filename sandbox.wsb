@@ -1,0 +1,17 @@
+<Configuration>
+  <vGPU>Enable</vGPU>
+  <Networking>Enable</Networking>
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>C:\temp\sandbox</HostFolder>
+      <SandboxFolder>C:\sandbox</SandboxFolder>
+    </MappedFolder>
+  </MappedFolders>
+  <LogonCommand>
+    <Command>powershell.exe -ExecutionPolicy Unrestricted -File "D:\Development\JavaScript\EdgeExtensionV1\install-and-run-openvpn.ps1"</Command>
+  </LogonCommand>
+  <AudioInput>Enable</AudioInput>
+  <VideoInput>Enable</VideoInput>
+  <ClipboardRedirection>Enable</ClipboardRedirection>
+  <MemoryInMB>4096</MemoryInMB>
+</Configuration>

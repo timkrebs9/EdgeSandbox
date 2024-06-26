@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Edge\NativeMessagingHosts\com.your_company.sandbox_opener]
+@="D:\\Development\\JavaScript\\EdgeExtensionV1\\native-messaging\\com.your_company.sandbox_opener.json"
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Edge\NativeMessagingHosts\com.your_company.sandbox_opener]
+@="D:\\Development\\JavaScript\\EdgeExtensionV1\\native-messaging\\com.your_company.sandbox_opener.json"
