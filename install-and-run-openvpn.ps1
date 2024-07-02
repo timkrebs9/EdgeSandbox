@@ -1,16 +1,33 @@
-# Ensure that the sub-key is created if it doesn't exist
-if (-not (Test-Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy")) {
-    New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Force
-}
+# =======================================================================================================================================================================
+# Purpose : Testing/Development
+#
+# DISCLAIMER: The sample scripts provided here are not supported under any Microsoft standard support program or service. 
+# All scripts are provided AS IS without warranty of any kind.
+# Microsoft further disclaims all implied warranties including, without limitation, any implied warranties of merchantability or of fitness for a particular purpose. 
+# The entire risk arising out of the use or performance of the sample scripts and documentation remains with you. 
+# In no event shall Microsoft, its authors, or anyone else involved in the creation, production, or delivery of the scripts be liable for any damages whatsoever 
+# (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or other pecuniary loss) 
+# arising out of the use of or inability to use the sample scripts or documentation, even if Microsoft has been advised of the possibility of such damages. 
+# 
+# ======================================================================================================================================================================
+<#
+.SYNOPSIS
+    Configures Windows and Edge policies and settings through the registry.
 
-# Set the policy to allow apps access to the camera
-New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera" -Value 1 -PropertyType DWord -Force
+.DESCRIPTION
+    This script sets various registry keys to configure policies for Windows and Microsoft Edge. It ensures that specific 
+    sub-keys are created if they do not exist and sets policies to allow apps access to the camera, disable the Start Menu, 
+    disable the Task Manager, and disable the Command Prompt. Additionally, it opens Microsoft Edge with a specific URL.
 
-New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_ForceAllowTheseApps" -PropertyType MultiString -Force
-New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_ForceDenyTheseApps" -PropertyType MultiString -Force
-New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_UserInControlOfTheseApps" -PropertyType MultiString -Force
+.VERSION
+    1.0 (2024-07-02)
 
-# Function to set registry key if it does not exist
+.NOTES
+    Author: Tim Krebs
+    Date: 2024-07-02
+    Script Version: 1.0
+#>
+
 function Set-RegistryKey {
     param (
         [string]$Path,
@@ -25,27 +42,24 @@ function Set-RegistryKey {
     New-ItemProperty -Path $Path -Name $Name -Value $Value -PropertyType $PropertyType -Force | Out-Null
 }
 
+# Ensure that the sub-key is created if it doesn't exist
+if (-not (Test-Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy")) {
+    New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Force
+}
+
+# Set the policy to allow apps access to the camera
+New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera" -Value 1 -PropertyType DWord -Force
+
+New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_ForceAllowTheseApps" -PropertyType MultiString -Force
+New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_ForceDenyTheseApps" -PropertyType MultiString -Force
+New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_UserInControlOfTheseApps" -PropertyType MultiString -Force
+
+
 # Disable Start Menu
 Set-RegistryKey -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoStartMenuMFUprogramsList" -Value 1
 
 # Set registry key for HubsSidebarEnabled
 Set-RegistryKey -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HubsSidebarEnabled" -Value 0
-
-# Path to the OpenVPN installer
-#$installerPath = "C:\sandbox\openvpn-install.msi"
-
-# Path to the OpenVPN configuration file
-#$configPath = "C:\sandbox\client.ovpn"
-
-# Install OpenVPN client silently
-#Start-Process msiexec.exe -Wait -ArgumentList '/I C:\sandbox\openvpn-install.msi /quiet'
-
-# Ensure OpenVPN GUI is not running
-#Stop-Process -Name OpenVPNConnect -ErrorAction SilentlyContinue
-
-# Start OpenVPN with the specified config by simulating right-click and selecting "Start OpenVPN on this config file"
-#$command = "cmd /c start `"" + $configPath + "`""
-#Invoke-Expression $command
 
 # Disable Task Manager
 Set-RegistryKey -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableTaskMgr" -Value 1
