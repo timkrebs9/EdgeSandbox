@@ -8,7 +8,7 @@
     </MappedFolder>
   </MappedFolders>
   <LogonCommand>
-    <Command>powershell.exe -ExecutionPolicy Unrestricted -File "D:\Development\JavaScript\EdgeExtensionV1\install-and-run-openvpn.ps1"</Command>
+    <Command>powershell.exe -ExecutionPolicy Bypass -File "D:\Development\JavaScript\EdgeExtensionV1\configureSandbox.ps1"</Command>
   </LogonCommand>
   <AudioInput>Enable</AudioInput>
   <VideoInput>Enable</VideoInput>
