@@ -3,7 +3,7 @@ Start-Process "msedge.exe" -Wait -WindowStyle Maximized -ArgumentList "https://w
 
 # Install certificate
 $params = @{
-    Filepath = "C:\sandbox\<CERT-NAME>.cer"
+    Filepath = "C:\CertStore\<CERT-NAME>.cer"
     CertStoreLocation = "Cert:\LocalMachine\Root"
 }
 Import-Certificate @params
