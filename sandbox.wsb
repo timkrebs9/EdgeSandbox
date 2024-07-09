@@ -6,6 +6,11 @@
       <HostFolder>C:\temp\sandbox</HostFolder>
       <SandboxFolder>C:\sandbox</SandboxFolder>
     </MappedFolder>
+    <MappedFolder>
+      <HostFolder>C:\temp\RootCA</HostFolder>
+      <SandboxFolder>C:\CertStore</SandboxFolder>
+      <ReadOnly>True</ReadOnly>
+    </MappedFolder>
   </MappedFolders>
   <LogonCommand>
     <Command>powershell.exe -ExecutionPolicy Bypass -File "D:\Development\JavaScript\EdgeExtensionV1\configureSandbox.ps1"</Command>
