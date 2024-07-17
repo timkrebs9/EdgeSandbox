@@ -1,6 +1,3 @@
-# Open Microsoft Edge with a specific URL (without kiosk mode)
-Start-Process "msedge.exe" -Wait -WindowStyle Maximized -ArgumentList "https://www.microsoft.com"
-
 # Install certificate
 $params = @{
     Filepath = "C:\CertStore\<CERT-NAME>.cer"
@@ -17,3 +14,6 @@ New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -N
 New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_ForceAllowTheseApps" -PropertyType MultiString -Force
 New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_ForceDenyTheseApps" -PropertyType MultiString -Force
 New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_UserInControlOfTheseApps" -PropertyType MultiString -Force
+
+# Open Microsoft Edge with a specific URL (without kiosk mode)
+Start-Process "msedge.exe" -Wait -WindowStyle Maximized -ArgumentList "https://www.microsoft.com"
