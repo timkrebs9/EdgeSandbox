@@ -5,6 +5,36 @@ $params = @{
 }
 Import-Certificate @params
 
+
+
+# Disable Powershell
+$explorerKeyPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+if (-not (Test-Path $explorerKeyPath)) {
+    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies" -Name "Explorer" -Force
+}
+
+New-ItemProperty -Path $explorerKeyPath -Name "DisallowRun" -PropertyType DWORD -Value 1 -Force
+
+$disallowRunKeyPath = "$explorerKeyPath\DisallowRun"
+if (-not (Test-Path $disallowRunKeyPath)) {
+    New-Item -Path $explorerKeyPath -Name "DisallowRun" -Force
+}
+
+$programsToBlock = @("powershell.exe", "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe", "cmd.exe")
+
+$count = 1
+foreach ($program in $programsToBlock) {
+    New-ItemProperty -Path $disallowRunKeyPath -Name $count -PropertyType String -Value $program -Force
+    $count++
+}
+
+# Restart Explorer to apply changes immediately
+Stop-Process -Name explorer -Force
+Start-Process -WindowStyle hidden -Name "explorer.exe"
+Set-ExecutionPolicy -ExecutionPolicy Restricted -Scope LocalMachine
+
+
+
 # Ensure that the sub-key is created if it doesn't exist
 if (-not (Test-Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy")) {
     New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Force
