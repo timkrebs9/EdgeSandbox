@@ -7,6 +7,10 @@
       <SandboxFolder>C:\sandbox</SandboxFolder>
     </MappedFolder>
     <MappedFolder>
+      <HostFolder>C:\temp\sandbox\Downloads</HostFolder>
+      <SandboxFolder>C:\Users\WDAGUtilityAccount\Downloads</SandboxFolder>
+    </MappedFolder>
+    <MappedFolder>
       <HostFolder>C:\temp\RootCA</HostFolder>
       <SandboxFolder>C:\CertStore</SandboxFolder>
       <ReadOnly>True</ReadOnly>
