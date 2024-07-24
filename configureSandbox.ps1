@@ -33,6 +33,20 @@ New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -N
 New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_ForceDenyTheseApps" -PropertyType MultiString -Force
 New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessCamera_UserInControlOfTheseApps" -PropertyType MultiString -Force
 
+####################################
+# Configure Proxy 
+####################################
+# Set Proxy settings in HKLM for all users
+
+$proxyServer = "proxy.example.com:8080"
+$proxyOverride = "*.local;192.168.*"
+
+New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings" -Name "ProxyEnable" -Value 1 -PropertyType DWORD -Force # Set Proxy Enable
+New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings" -Name "ProxyServer" -Value $proxyServer -PropertyType String -Force # Set Proxy Server
+New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings" -Name "ProxyOverride" -Value $proxyOverride -PropertyType String -Force # Set Proxy Override
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings" -Name "ProxySettingsPerUser" -Value 0 -PropertyType DWORD -Force # Notify system about proxy settings change
+
+
 ##############################################################
 # Disable Powershell
 ##############################################################
